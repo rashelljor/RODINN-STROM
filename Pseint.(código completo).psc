@@ -1,22 +1,22 @@
-// ============================================================
-// ¡RBOL GENEAL”GICO - CIVILIZACI”N ANTIGUA (VERSI”N CORREGIDA FINAL)
-// Sistema de gestiÛn de ·rboles binarios de b˙squeda
+.-// ============================================================
+// √ÅRBOL GENEAL√ìGICO - CIVILIZACI√ìN ANTIGUA (VERSI√ìN CORREGIDA FINAL)
+// Sistema de gesti√≥n de √°rboles binarios de b√∫squeda
 // ============================================================
 
 Algoritmo ArbolGenealogico
-    // ==================== DECLARACI”N DE VARIABLES ====================
+    // ==================== DECLARACI√ìN DE VARIABLES ====================
     Definir opcion, subopcion, id, anio, totalNodos Como Entero
     Definir nombre, genero, rol, respuesta Como Cadena
     Definir continuar Como Logico
     
-    // Arrays para simular ·rbol (m·ximo 100 nodos) - Õndices desde 1
+    // Arrays para simular √°rbol (m√°ximo 100 nodos) - √çndices desde 1
     Dimension arbolID[100], arbolNombre[100], arbolAnio[100]
     Dimension arbolGenero[100], arbolRol[100]
     Dimension arbolIzq[100], arbolDer[100], arbolPadre[100]
     
     totalNodos <- 0
     
-    // Inicializar ·rbol vacÌo (Ìndices desde 1 hasta 100)
+    // Inicializar √°rbol vac√≠o (√≠ndices desde 1 hasta 100)
     Para i <- 1 Hasta 100 Hacer
         arbolID[i] <- -1
         arbolIzq[i] <- -1
@@ -24,33 +24,33 @@ Algoritmo ArbolGenealogico
         arbolPadre[i] <- -1
     FinPara
     
-    // ==================== MEN⁄ PRINCIPAL ====================
+    // ==================== MEN√ö PRINCIPAL ====================
     Repetir
         Limpiar Pantalla
         Escribir "=========================================="
-        Escribir "  ¡RBOL GENEAL”GICO - CIVILIZACI”N"
+        Escribir "  √ÅRBOL GENEAL√ìGICO - CIVILIZACI√ìN"
         Escribir "=========================================="
-        Escribir "1. GestiÛn de Miembros"
-        Escribir "2. Recorridos del ¡rbol"
-        Escribir "3. InformaciÛn del ¡rbol"
+        Escribir "1. Gesti√≥n de Miembros"
+        Escribir "2. Recorridos del √Årbol"
+        Escribir "3. Informaci√≥n del √Årbol"
         Escribir "4. Operaciones Avanzadas"
         Escribir "5. Salir"
         Escribir "=========================================="
-        Escribir Sin Saltar "Seleccione una opciÛn: "
+        Escribir Sin Saltar "Seleccione una opci√≥n: "
         Leer opcion
         
         Segun opcion Hacer
-				// ==================== GESTI”N DE MIEMBROS ====================
+				// ==================== GESTI√ìN DE MIEMBROS ====================
             1:
                 Repetir
                     Limpiar Pantalla
-                    Escribir "========== GESTI”N DE MIEMBROS =========="
+                    Escribir "========== GESTI√ìN DE MIEMBROS =========="
                     Escribir "1. Insertar nuevo miembro"
                     Escribir "2. Buscar miembro"
                     Escribir "3. Eliminar miembro"
-                    Escribir "4. Volver al men˙ principal"
+                    Escribir "4. Volver al men√∫ principal"
                     Escribir "=========================================="
-                    Escribir Sin Saltar "Seleccione una opciÛn: "
+                    Escribir Sin Saltar "Seleccione una opci√≥n: "
                     Leer subopcion
                     
                     Segun subopcion Hacer
@@ -58,7 +58,7 @@ Algoritmo ArbolGenealogico
                             Escribir ""
                             Escribir "--- INSERTAR NUEVO MIEMBRO ---"
                             
-                            // Validar ID (positivo y ˙nico)
+                            // Validar ID (positivo y √∫nico)
                             Repetir
                                 Escribir Sin Saltar "Ingrese ID del miembro: "
                                 Leer id
@@ -74,62 +74,62 @@ Algoritmo ArbolGenealogico
                                         FinPara
                                     FinSi
                                     Si idExiste Entonces
-                                        Escribir "ERROR: El ID ya existe en el ·rbol"
+                                        Escribir "ERROR: El ID ya existe en el √°rbol"
                                     FinSi
                                 FinSi
                             Hasta Que id > 0 Y No idExiste
                             
-                            // Validar nombre (no vacÌo)
+                            // Validar nombre (no vac√≠o)
                             Repetir
                                 Escribir Sin Saltar "Ingrese nombre completo: "
                                 Leer nombre
                                 Si Longitud(nombre) = 0 Entonces
-                                    Escribir "ERROR: El nombre no puede estar vacÌo"
+                                    Escribir "ERROR: El nombre no puede estar vac√≠o"
                                 FinSi
                             Hasta Que Longitud(nombre) > 0
                             
-                            // Validar aÒo de nacimiento (positivo)
+                            // Validar a√±o de nacimiento (positivo)
                             Repetir
-                                Escribir Sin Saltar "Ingrese aÒo de nacimiento: "
+                                Escribir Sin Saltar "Ingrese a√±o de nacimiento: "
                                 Leer anio
                                 Si anio <= 0 Entonces
-                                    Escribir "ERROR: El aÒo debe ser mayor a 0"
+                                    Escribir "ERROR: El a√±o debe ser mayor a 0"
                                 FinSi
                             Hasta Que anio > 0
                             
-                            // Validar gÈnero (M, m, F, f)
+                            // Validar g√©nero (M, m, F, f)
                             Repetir
-                                Escribir Sin Saltar "Ingrese gÈnero (M/F): "
+                                Escribir Sin Saltar "Ingrese g√©nero (M/F): "
                                 Leer genero
                                 genero <- Mayusculas(genero)
                                 Si genero <> "M" Y genero <> "F" Entonces
-                                    Escribir "ERROR: El gÈnero debe ser M o F"
+                                    Escribir "ERROR: El g√©nero debe ser M o F"
                                 FinSi
                             Hasta Que genero = "M" O genero = "F"
                             
-                            // Validar rol (no vacÌo)
+                            // Validar rol (no vac√≠o)
                             Repetir
                                 Escribir Sin Saltar "Ingrese rol social: "
                                 Leer rol
                                 Si Longitud(rol) = 0 Entonces
-                                    Escribir "ERROR: El rol no puede estar vacÌo"
+                                    Escribir "ERROR: El rol no puede estar vac√≠o"
                                 FinSi
                             Hasta Que Longitud(rol) > 0
                             
-                            // Insertar en el ·rbol
+                            // Insertar en el √°rbol
                             Si totalNodos = 0 Entonces
-                                // Primer nodo (raÌz) - Ìndice 1
+                                // Primer nodo (ra√≠z) - √≠ndice 1
                                 totalNodos <- 1
                                 arbolID[1] <- id
                                 arbolNombre[1] <- nombre
                                 arbolAnio[1] <- anio
                                 arbolGenero[1] <- genero
                                 arbolRol[1] <- rol
-                                arbolPadre[1] <- 0  // La raÌz no tiene padre
+                                arbolPadre[1] <- 0  // La ra√≠z no tiene padre
                                 Escribir ""
-                                Escribir "? Miembro insertado como raÌz del ·rbol"
+                                Escribir "? Miembro insertado como ra√≠z del √°rbol"
                             Sino
-                                // Buscar posiciÛn correcta
+                                // Buscar posici√≥n correcta
                                 actual <- 1
                                 insertado <- Falso
                                 
@@ -178,7 +178,7 @@ Algoritmo ArbolGenealogico
                             Escribir "--- BUSCAR MIEMBRO ---"
                             
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 // MOSTRAR TODOS LOS MIEMBROS REGISTRADOS
                                 Escribir "Miembros registrados:"
@@ -202,8 +202,8 @@ Algoritmo ArbolGenealogico
                                         Escribir "? Miembro encontrado:"
                                         Escribir "  ID: ", arbolID[i]
                                         Escribir "  Nombre: ", arbolNombre[i]
-                                        Escribir "  AÒo: ", arbolAnio[i]
-                                        Escribir "  GÈnero: ", arbolGenero[i]
+                                        Escribir "  A√±o: ", arbolAnio[i]
+                                        Escribir "  G√©nero: ", arbolGenero[i]
                                         Escribir "  Rol: ", arbolRol[i]
                                     FinSi
                                 FinPara
@@ -221,7 +221,7 @@ Algoritmo ArbolGenealogico
                             Escribir "--- ELIMINAR MIEMBRO ---"
                             
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 // MOSTRAR TODOS LOS MIEMBROS REGISTRADOS
                                 Escribir "Miembros registrados:"
@@ -257,28 +257,28 @@ Algoritmo ArbolGenealogico
                     FinSegun
                 Hasta Que subopcion = 4
                 
-				// ==================== RECORRIDOS DEL ¡RBOL (CORREGIDOS) ====================
+				// ==================== RECORRIDOS DEL √ÅRBOL (CORREGIDOS) ====================
             2:
                 Repetir
                     Limpiar Pantalla
-                    Escribir "========== RECORRIDOS DEL ¡RBOL =========="
+                    Escribir "========== RECORRIDOS DEL √ÅRBOL =========="
                     Escribir "1. Recorrido Inorden"
                     Escribir "2. Recorrido Preorden"
                     Escribir "3. Recorrido Postorden"
                     Escribir "4. Recorrido por Niveles"
-                    Escribir "5. Volver al men˙ principal"
+                    Escribir "5. Volver al men√∫ principal"
                     Escribir "=========================================="
-                    Escribir Sin Saltar "Seleccione una opciÛn: "
+                    Escribir Sin Saltar "Seleccione una opci√≥n: "
                     Leer subopcion
                     
                     Si subopcion >= 1 Y subopcion <= 4 Entonces
                         Escribir ""
                         
                         Si totalNodos = 0 Entonces
-                            Escribir "El ·rbol est· vacÌo"
+                            Escribir "El √°rbol est√° vac√≠o"
                         Sino
                             Segun subopcion Hacer
-                                1: // INORDEN (Izquierda-RaÌz-Derecha)
+                                1: // INORDEN (Izquierda-Ra√≠z-Derecha)
                                     Escribir "--- RECORRIDO INORDEN ---"
                                     Escribir "(Orden ascendente por ID)"
                                     Escribir ""
@@ -310,9 +310,9 @@ Algoritmo ArbolGenealogico
                                     FinMientras
                                     Escribir ""
                                     
-                                2: // PREORDEN (RaÌz-Izquierda-Derecha)
+                                2: // PREORDEN (Ra√≠z-Izquierda-Derecha)
                                     Escribir "--- RECORRIDO PREORDEN ---"
-                                    Escribir "(JerarquÌa desde la raÌz)"
+                                    Escribir "(Jerarqu√≠a desde la ra√≠z)"
                                     Escribir ""
                                     
                                     Dimension pila[100]
@@ -341,7 +341,7 @@ Algoritmo ArbolGenealogico
                                     FinSi
                                     Escribir ""
                                     
-                                3: // POSTORDEN (Izquierda-Derecha-RaÌz)
+                                3: // POSTORDEN (Izquierda-Derecha-Ra√≠z)
                                     Escribir "--- RECORRIDO POSTORDEN ---"
                                     Escribir "(Procesamiento desde las hojas)"
                                     Escribir ""
@@ -393,36 +393,36 @@ Algoritmo ArbolGenealogico
                     FinSi
                 Hasta Que subopcion = 5
                 
-				// ==================== INFORMACI”N DEL ¡RBOL (CORREGIDO) ====================
+				// ==================== INFORMACI√ìN DEL √ÅRBOL (CORREGIDO) ====================
             3:
                 Repetir
                     Limpiar Pantalla
-                    Escribir "========== INFORMACI”N DEL ¡RBOL =========="
-                    Escribir "1. Mostrar altura del ·rbol"
-                    Escribir "2. Mostrar nodo raÌz"
+                    Escribir "========== INFORMACI√ìN DEL √ÅRBOL =========="
+                    Escribir "1. Mostrar altura del √°rbol"
+                    Escribir "2. Mostrar nodo ra√≠z"
                     Escribir "3. Mostrar nodos hoja"
                     Escribir "4. Mostrar nodos internos"
-                    Escribir "5. Calcular peso del ·rbol"
-                    Escribir "6. Volver al men˙ principal"
+                    Escribir "5. Calcular peso del √°rbol"
+                    Escribir "6. Volver al men√∫ principal"
                     Escribir "=========================================="
-                    Escribir Sin Saltar "Seleccione una opciÛn: "
+                    Escribir Sin Saltar "Seleccione una opci√≥n: "
                     Leer subopcion
                     
                     Escribir ""
                     
                     Segun subopcion Hacer
-                        1: // ALTURA DEL ¡RBOL (CORREGIDO)
-                            Escribir "--- ALTURA DEL ¡RBOL ---"
+                        1: // ALTURA DEL √ÅRBOL (CORREGIDO)
+                            Escribir "--- ALTURA DEL √ÅRBOL ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo (altura = 0)"
+                                Escribir "El √°rbol est√° vac√≠o (altura = 0)"
                             Sino
-                                // Calcular altura real del ·rbol usando niveles
+                                // Calcular altura real del √°rbol usando niveles
                                 Dimension nivelNodo[100]
                                 Para i <- 1 Hasta 100 Hacer
                                     nivelNodo[i] <- -1
                                 FinPara
                                 
-                                nivelNodo[1] <- 0  // La raÌz est· en nivel 0
+                                nivelNodo[1] <- 0  // La ra√≠z est√° en nivel 0
                                 alturaMaxima <- 0
                                 
                                 // Recorrer por niveles y asignar nivel a cada nodo
@@ -452,18 +452,18 @@ Algoritmo ArbolGenealogico
                                     FinSi
                                 FinMientras
                                 
-                                Escribir "La altura del ·rbol es: ", alturaMaxima
+                                Escribir "La altura del √°rbol es: ", alturaMaxima
                             FinSi
                             Escribir ""
                             Escribir "Presione ENTER para continuar..."
                             Esperar Tecla
                             
-                        2: // NODO RAÕZ
-                            Escribir "--- NODO RAÕZ ---"
+                        2: // NODO RA√çZ
+                            Escribir "--- NODO RA√çZ ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
-                                Escribir "El nodo raÌz es: ", arbolID[1]
+                                Escribir "El nodo ra√≠z es: ", arbolID[1]
                                 Escribir "Nombre: ", arbolNombre[1]
                             FinSi
                             Escribir ""
@@ -473,7 +473,7 @@ Algoritmo ArbolGenealogico
                         3: // NODOS HOJA
                             Escribir "--- NODOS HOJA ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 Escribir "Los nodos hoja son:"
                                 hayHojas <- Falso
@@ -493,17 +493,17 @@ Algoritmo ArbolGenealogico
                             Escribir "Presione ENTER para continuar..."
                             Esperar Tecla
                             
-                        4: // NODOS INTERNOS (CORREGIDO - SIN INCLUIR RAÕZ)
+                        4: // NODOS INTERNOS (CORREGIDO - SIN INCLUIR RA√çZ)
                             Escribir "--- NODOS INTERNOS ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             SiNo
                                 Si totalNodos = 1 Entonces
-                                    Escribir "No hay nodos internos (solo existe la raÌz)"
+                                    Escribir "No hay nodos internos (solo existe la ra√≠z)"
                                 Sino
-                                    Escribir "Los nodos internos (sin incluir raÌz) son:"
+                                    Escribir "Los nodos internos (sin incluir ra√≠z) son:"
                                     hayInternos <- Falso
-                                    // Empezar desde 2 para excluir la raÌz (Ìndice 1)
+                                    // Empezar desde 2 para excluir la ra√≠z (√≠ndice 1)
                                     Para i <- 2 Hasta totalNodos Hacer
                                         Si arbolID[i] <> -1 Y (arbolIzq[i] <> -1 O arbolDer[i] <> -1) Entonces
                                             Escribir Sin Saltar arbolID[i], " "
@@ -511,7 +511,7 @@ Algoritmo ArbolGenealogico
                                         FinSi
                                     FinPara
                                     Si No hayInternos Entonces
-                                        Escribir "No hay nodos internos adem·s de la raÌz"
+                                        Escribir "No hay nodos internos adem√°s de la ra√≠z"
                                     Sino
                                         Escribir ""
                                     FinSi
@@ -521,10 +521,10 @@ Algoritmo ArbolGenealogico
                             Escribir "Presione ENTER para continuar..."
                             Esperar Tecla
                             
-                        5: // PESO DEL ¡RBOL
-                            Escribir "--- PESO DEL ¡RBOL ---"
+                        5: // PESO DEL √ÅRBOL
+                            Escribir "--- PESO DEL √ÅRBOL ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo (peso = 0)"
+                                Escribir "El √°rbol est√° vac√≠o (peso = 0)"
                             Sino
                                 peso <- 0
                                 Para i <- 1 Hasta totalNodos Hacer
@@ -532,7 +532,7 @@ Algoritmo ArbolGenealogico
                                         peso <- peso + 1
                                     FinSi
                                 FinPara
-                                Escribir "El peso del ·rbol (total de nodos) es: ", peso
+                                Escribir "El peso del √°rbol (total de nodos) es: ", peso
                             FinSi
                             Escribir ""
                             Escribir "Presione ENTER para continuar..."
@@ -545,26 +545,26 @@ Algoritmo ArbolGenealogico
                 Repetir
                     Limpiar Pantalla
                     Escribir "========== OPERACIONES AVANZADAS =========="
-                    Escribir "1. Mostrar camino desde raÌz a nodo"
+                    Escribir "1. Mostrar camino desde ra√≠z a nodo"
                     Escribir "2. Calcular longitud del camino"
                     Escribir "3. Mostrar altura de un nodo"
                     Escribir "4. Mostrar nivel de un nodo"
-                    Escribir "5. Balancear ·rbol"
-                    Escribir "6. Volver al men˙ principal"
+                    Escribir "5. Balancear √°rbol"
+                    Escribir "6. Volver al men√∫ principal"
                     Escribir "=========================================="
-                    Escribir Sin Saltar "Seleccione una opciÛn: "
+                    Escribir Sin Saltar "Seleccione una opci√≥n: "
                     Leer subopcion
                     
                     Escribir ""
                     
                     Segun subopcion Hacer
-                        1: // CAMINO DESDE RAÕZ (CORREGIDO - MUESTRA TODOS LOS NODOS)
-                            Escribir "--- CAMINO DESDE RAÕZ A NODO ---"
+                        1: // CAMINO DESDE RA√çZ (CORREGIDO - MUESTRA TODOS LOS NODOS)
+                            Escribir "--- CAMINO DESDE RA√çZ A NODO ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 // Mostrar IDs disponibles
-                                Escribir "IDs disponibles en el ·rbol:"
+                                Escribir "IDs disponibles en el √°rbol:"
                                 Escribir "------------------------------------"
                                 Para i <- 1 Hasta totalNodos Hacer
                                     Si arbolID[i] <> -1 Entonces
@@ -577,7 +577,7 @@ Algoritmo ArbolGenealogico
                                 Escribir Sin Saltar "Ingrese ID del nodo destino: "
                                 Leer id
                                 
-                                // Buscar el nodo en el ·rbol
+                                // Buscar el nodo en el √°rbol
                                 indiceDestino <- -1
                                 Para i <- 1 Hasta totalNodos Hacer
                                     Si arbolID[i] = id Entonces
@@ -588,20 +588,20 @@ Algoritmo ArbolGenealogico
                                 Si indiceDestino = -1 Entonces
                                     Escribir "? Nodo no encontrado"
                                 Sino
-                                    // Reconstruir el camino desde el nodo hacia la raÌz
+                                    // Reconstruir el camino desde el nodo hacia la ra√≠z
                                     Dimension camino[100]
                                     longitudCamino <- 0
                                     actual <- indiceDestino
                                     
-                                    // Ir hacia arriba hasta la raÌz
+                                    // Ir hacia arriba hasta la ra√≠z
                                     Mientras actual <> 0 Y actual <> -1 Hacer
                                         longitudCamino <- longitudCamino + 1
                                         camino[longitudCamino] <- arbolID[actual]
                                         actual <- arbolPadre[actual]
                                     FinMientras
                                     
-                                    // Mostrar el camino desde la raÌz hasta el nodo (invertido)
-                                    Escribir "Camino desde raÌz hasta ", id, ":"
+                                    // Mostrar el camino desde la ra√≠z hasta el nodo (invertido)
+                                    Escribir "Camino desde ra√≠z hasta ", id, ":"
                                     Para i <- longitudCamino Hasta 1 Con Paso -1 Hacer
                                         Si i > 1 Entonces
                                             Escribir Sin Saltar camino[i], " -> "
@@ -619,10 +619,10 @@ Algoritmo ArbolGenealogico
                         2: // LONGITUD DEL CAMINO (CORREGIDA - CUENTA ARISTAS REALES)
                             Escribir "--- LONGITUD DEL CAMINO ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 // Mostrar IDs disponibles
-                                Escribir "IDs disponibles en el ·rbol:"
+                                Escribir "IDs disponibles en el √°rbol:"
                                 Escribir "------------------------------------"
                                 Para i <- 1 Hasta totalNodos Hacer
                                     Si arbolID[i] <> -1 Entonces
@@ -646,7 +646,7 @@ Algoritmo ArbolGenealogico
                                 Si indiceNodo = -1 Entonces
                                     Escribir "? Nodo no encontrado"
                                 Sino
-                                    // Contar aristas desde la raÌz hasta el nodo
+                                    // Contar aristas desde la ra√≠z hasta el nodo
                                     longitudCamino <- 0
                                     actual <- indiceNodo
                                     
@@ -655,7 +655,7 @@ Algoritmo ArbolGenealogico
                                         actual <- arbolPadre[actual]
                                     FinMientras
                                     
-                                    Escribir "Longitud del camino desde raÌz hasta ", id, ": ", longitudCamino, " arista(s)"
+                                    Escribir "Longitud del camino desde ra√≠z hasta ", id, ": ", longitudCamino, " arista(s)"
                                 FinSi
                             FinSi
                             Escribir ""
@@ -665,10 +665,10 @@ Algoritmo ArbolGenealogico
                         3: // ALTURA DE UN NODO (CORREGIDA - CALCULA DESDE EL NODO)
                             Escribir "--- ALTURA DE UN NODO ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 // Mostrar IDs disponibles
-                                Escribir "IDs disponibles en el ·rbol:"
+                                Escribir "IDs disponibles en el √°rbol:"
                                 Escribir "------------------------------------"
 								Para i <- 1 Hasta totalNodos Hacer
                                     Si arbolID[i] <> -1 Entonces
@@ -692,8 +692,8 @@ Algoritmo ArbolGenealogico
                                 Si indiceNodo = -1 Entonces
                                     Escribir "? Nodo no encontrado"
                                 Sino
-                                    // Calcular altura del nodo (distancia m·xima a una hoja)
-                                    // Usar BFS desde el nodo para encontrar el descendiente m·s lejano
+                                    // Calcular altura del nodo (distancia m√°xima a una hoja)
+                                    // Usar BFS desde el nodo para encontrar el descendiente m√°s lejano
                                     Dimension cola[100]
                                     Dimension nivelDesdeNodo[100]
                                     
@@ -729,7 +729,7 @@ Algoritmo ArbolGenealogico
                                     FinMientras
                                     
                                     Escribir "Altura del nodo ", id, ": ", alturaMaxima
-                                    Escribir "(Distancia m·xima desde ", id, " hasta una hoja)"
+                                    Escribir "(Distancia m√°xima desde ", id, " hasta una hoja)"
                                 FinSi
                             FinSi
                             Escribir ""
@@ -739,10 +739,10 @@ Algoritmo ArbolGenealogico
                         4: // NIVEL DE UN NODO (CORREGIDO - CALCULA NIVEL REAL)
                             Escribir "--- NIVEL DE UN NODO ---"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
                                 // Mostrar IDs disponibles
-                                Escribir "IDs disponibles en el ·rbol:"
+                                Escribir "IDs disponibles en el √°rbol:"
                                 Escribir "------------------------------------"
                                 Para i <- 1 Hasta totalNodos Hacer
                                     Si arbolID[i] <> -1 Entonces
@@ -766,7 +766,7 @@ Algoritmo ArbolGenealogico
                                 Si indiceNodo = -1 Entonces
                                     Escribir "? Nodo no encontrado"
                                 Sino
-                                    // Calcular nivel contando padres hasta la raÌz
+                                    // Calcular nivel contando padres hasta la ra√≠z
                                     nivel <- 0
                                     actual <- indiceNodo
                                     
@@ -776,45 +776,45 @@ Algoritmo ArbolGenealogico
                                     FinMientras
                                     
                                     Escribir "Nivel del nodo ", id, ": ", nivel
-                                    Escribir "(La raÌz est· en nivel 0)"
+                                    Escribir "(La ra√≠z est√° en nivel 0)"
                                 FinSi
                             FinSi
                             Escribir ""
                             Escribir "Presione ENTER para continuar..."
                             Esperar Tecla
                             
-                        5: // BALANCEAR ¡RBOL (PROPUESTA DE MEJORA)
-                            Escribir "--- BALANCEAR ¡RBOL ---"
+                        5: // BALANCEAR √ÅRBOL (PROPUESTA DE MEJORA)
+                            Escribir "--- BALANCEAR √ÅRBOL ---"
                             Escribir ""
                             Escribir "=== PROPUESTA DE MEJORA ==="
                             Escribir ""
-                            Escribir "Para balancear correctamente un ·rbol binario de b˙squeda"
+                            Escribir "Para balancear correctamente un √°rbol binario de b√∫squeda"
                             Escribir "se requiere implementar algoritmos complejos como:"
                             Escribir ""
                             Escribir "1. Algoritmo AVL (rotaciones simples y dobles)"
                             Escribir "2. Algoritmo Rojo-Negro"
-                            Escribir "3. ReconstrucciÛn completa del ·rbol"
+                            Escribir "3. Reconstrucci√≥n completa del √°rbol"
                             Escribir ""
                             Escribir "PSeInt tiene limitaciones para implementar estos algoritmos"
                             Escribir "de manera eficiente debido a:"
-                            Escribir "- Falta de recursiÛn robusta"
+                            Escribir "- Falta de recursi√≥n robusta"
                             Escribir "- Estructuras de datos limitadas"
                             Escribir "- Complejidad de las rotaciones en arrays"
                             Escribir ""
-                            Escribir "SOLUCI”N RECOMENDADA:"
+                            Escribir "SOLUCI√ìN RECOMENDADA:"
                             Escribir "Implementar balanceo en lenguajes como C++, Java o Python"
                             Escribir "que permiten:"
                             Escribir "- Uso de punteros/referencias"
-                            Escribir "- RecursiÛn eficiente"
-                            Escribir "- Estructuras din·micas"
+                            Escribir "- Recursi√≥n eficiente"
+                            Escribir "- Estructuras din√°micas"
                             Escribir ""
-                            Escribir "ALTERNATIVA SIMPLE (para demostraciÛn):"
+                            Escribir "ALTERNATIVA SIMPLE (para demostraci√≥n):"
                             Si totalNodos = 0 Entonces
-                                Escribir "El ·rbol est· vacÌo"
+                                Escribir "El √°rbol est√° vac√≠o"
                             Sino
-                                // Mostrar informaciÛn b·sica de balance
+                                // Mostrar informaci√≥n b√°sica de balance
                                 Escribir ""
-                                Escribir "An·lisis b·sico del ·rbol actual:"
+                                Escribir "An√°lisis b√°sico del √°rbol actual:"
                                 Escribir "- Total de nodos: ", totalNodos
                                 
                                 // Calcular altura
@@ -865,12 +865,12 @@ Algoritmo ArbolGenealogico
                                 Escribir "- Altura ideal (balanceado): ", alturaIdeal
                                 
                                 Si alturaMaxima <= alturaIdeal + 1 Entonces
-                                    Escribir "- Estado: ? El ·rbol est· relativamente balanceado"
+                                    Escribir "- Estado: ? El √°rbol est√° relativamente balanceado"
                                 Sino
-                                    Escribir "- Estado: ? El ·rbol necesita balanceo"
+                                    Escribir "- Estado: ? El √°rbol necesita balanceo"
                                     Escribir ""
-                                    Escribir "Sugerencia: Implemente un ·rbol AVL o Rojo-Negro"
-                                    Escribir "en un lenguaje m·s robusto para balanceo autom·tico."
+                                    Escribir "Sugerencia: Implemente un √°rbol AVL o Rojo-Negro"
+                                    Escribir "en un lenguaje m√°s robusto para balanceo autom√°tico."
                                 FinSi
                             FinSi
                             Escribir ""
@@ -885,13 +885,13 @@ Algoritmo ArbolGenealogico
                 Escribir ""
                 Escribir "=========================================="
                 Escribir "  Saliendo del sistema..."
-                Escribir "  °Hasta pronto!"
+                Escribir "  ¬°Hasta pronto!"
                 Escribir "=========================================="
                 Escribir ""
                 
             De Otro Modo:
                 Escribir ""
-                Escribir "? OpciÛn no v·lida. Intente nuevamente."
+                Escribir "? Opci√≥n no v√°lida. Intente nuevamente."
                 Escribir ""
                 Escribir "Presione ENTER para continuar..."
                 Esperar Tecla
@@ -899,4 +899,5 @@ Algoritmo ArbolGenealogico
         
     Hasta Que opcion = 5
     
+
 FinAlgoritmo
