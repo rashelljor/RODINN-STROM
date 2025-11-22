@@ -1,35 +1,35 @@
 /*============================================================================
-LIBRERÕAS INCLUIDAS - HERRAMIENTAS QUE NECESITA EL PROGRAMA
+LIBRER√çAS INCLUIDAS - HERRAMIENTAS QUE NECESITA EL PROGRAMA
 ============================================================================*/
 
 #include <iostream> 	// Para entrada/salida (cout, cin)
 #include <string>       // Para manejar cadenas de texto (nombres, roles)
 #include <queue>        // Para implementar cola (usado en recorrido por niveles)
-#include <vector>       // Para almacenar listas din·micas de resultados de b˙squeda
-#include <algorithm>    // Para funciones como transform() usado en b˙squeda de nombres
+#include <vector>       // Para almacenar listas din√°micas de resultados de b√∫squeda
+#include <algorithm>    // Para funciones como transform() usado en b√∫squeda de nombres
 #include <cstdlib>      // Para funciones del sistema como system("cls")
-#include <limits>       // Para lÌmites numÈricos (usado en pausar())
-#include <cmath>        // Para funciones matem·ticas como log2() en balanceo
+#include <limits>       // Para l√≠mites num√©ricos (usado en pausar())
+#include <cmath>        // Para funciones matem√°ticas como log2() en balanceo
 
 using namespace std;
 
 
 /*============================================================================
-ESTRUCTURA DE DATOS - DEFINICI”N DEL NODO DEL ¡RBOL
+ESTRUCTURA DE DATOS - DEFINICI√ìN DEL NODO DEL √ÅRBOL
 ============================================================================
-Esta es la PIEZA FUNDAMENTAL del ·rbol genealÛgico
-Cada nodo representa un miembro de la civilizaciÛn*/
+Esta es la PIEZA FUNDAMENTAL del √°rbol geneal√≥gico
+Cada nodo representa un miembro de la civilizaci√≥n*/
 
 // Estructura del Nodo
 struct Nodo {
-	// DATOS DEL MIEMBRO (informaciÛn que se almacena)
-    int id; // Identificador ˙nico (clave para ordenar en el ·rbol)
+	// DATOS DEL MIEMBRO (informaci√≥n que se almacena)
+    int id; // Identificador √∫nico (clave para ordenar en el √°rbol)
     string nombre;
     int anio;
     char genero;
     string rol; // Rol social (agricultor, guerrero, etc.)
     
-    // PUNTEROS - CONEXIONES CON OTROS NODOS DEL ¡RBOL
+    // PUNTEROS - CONEXIONES CON OTROS NODOS DEL √ÅRBOL
     Nodo* izq;        // Apunta al hijo IZQUIERDO (IDs menores)
     Nodo* der;        // Apunta al hijo DERECHO (IDs mayores)
     Nodo* padre;      // Apunta al nodo PADRE (para navegar hacia arriba)
@@ -51,10 +51,10 @@ struct Nodo {
 
 
 /*============================================================================
-VARIABLE GLOBAL - RAÕZ DEL ¡RBOL
+VARIABLE GLOBAL - RA√çZ DEL √ÅRBOL
 ============================================================================
-Esta es la ENTRADA al ·rbol, el primer nodo desde donde comienza todo
-Si raiz == NULL, el ·rbol est· vacÌo*/
+Esta es la ENTRADA al √°rbol, el primer nodo desde donde comienza todo
+Si raiz == NULL, el √°rbol est√° vac√≠o*/
 Nodo* raiz = NULL;
 
 
@@ -62,37 +62,37 @@ Nodo* raiz = NULL;
 /*============================================================================
 PROTOTIPOS DE FUNCIONES - DECLARACIONES ANTICIPADAS
 ============================================================================
-Esto le dice al compilador quÈ funciones existen antes de definirlas*/
+Esto le dice al compilador qu√© funciones existen antes de definirlas*/
 
 // --- FUNCIONES AUXILIARES DE INTERFAZ ---
 void limpiarPantalla();                                    // Limpia la pantalla
 void pausar();                                             // Espera ENTER del usuario
 
-// --- OPERACIONES B¡SICAS DEL ¡RBOL ---
+// --- OPERACIONES B√ÅSICAS DEL √ÅRBOL ---
 void insertar(int id, string nombre, int anio, char genero, string rol); // Agrega un miembro
 Nodo* buscar(Nodo* nodo, int id);                         // Busca por ID
 bool existeID(Nodo* nodo, int id);                        // Verifica si un ID existe
 void mostrarMiembros(Nodo* nodo);                         // Lista todos los miembros
 void eliminarNodo(int id);                                // Elimina un miembro
 
-// --- RECORRIDOS DEL ¡RBOL ---
-void inorden(Nodo* nodo);                                 // Recorrido: Izq -> RaÌz -> Der
-void preorden(Nodo* nodo);                                // Recorrido: RaÌz -> Izq -> Der
-void postorden(Nodo* nodo);                               // Recorrido: Izq -> Der -> RaÌz
+// --- RECORRIDOS DEL √ÅRBOL ---
+void inorden(Nodo* nodo);                                 // Recorrido: Izq -> Ra√≠z -> Der
+void preorden(Nodo* nodo);                                // Recorrido: Ra√≠z -> Izq -> Der
+void postorden(Nodo* nodo);                               // Recorrido: Izq -> Der -> Ra√≠z
 void porNiveles(Nodo* nodo);                              // Recorrido por generaciones
 
-// --- INFORMACI”N DEL ¡RBOL ---
-int calcularAltura(Nodo* nodo);                           // Altura del ·rbol
+// --- INFORMACI√ìN DEL √ÅRBOL ---
+int calcularAltura(Nodo* nodo);                           // Altura del √°rbol
 void mostrarHojas(Nodo* nodo);                            // Nodos sin hijos
 void mostrarInternos(Nodo* nodo, bool esRaiz);           // Nodos con hijos
 int contarNodos(Nodo* nodo);                              // Total de nodos
 
 // --- OPERACIONES AVANZADAS ---
-void mostrarCamino(Nodo* nodo, int id);                   // Camino desde raÌz a nodo
+void mostrarCamino(Nodo* nodo, int id);                   // Camino desde ra√≠z a nodo
 int calcularNivel(Nodo* nodo, int id, int nivel);        // Nivel de un nodo
-int longitudCamino(Nodo* nodo, int id, int nivel);       // Distancia desde raÌz
+int longitudCamino(Nodo* nodo, int id, int nivel);       // Distancia desde ra√≠z
 
-// --- B⁄SQUEDAS AVANZADAS ---
+// --- B√öSQUEDAS AVANZADAS ---
 void buscarPorAnio(Nodo* nodo, int anio, vector<Nodo*>& resultados);
 void buscarPorNombre(Nodo* nodo, string nombre, vector<Nodo*>& resultados);
 void buscarPorGenero(Nodo* nodo, char genero, vector<Nodo*>& resultados);
@@ -101,22 +101,22 @@ void mostrarResultados(vector<Nodo*>& resultados, string criterio);
 
 
 /*============================================================================
-FUNCI”N: limpiarPantalla()
-PROP”SITO: Limpia la consola para mejorar la presentaciÛn visual
-UBICACI”N: FunciÛn auxiliar de interfaz
+FUNCI√ìN: limpiarPantalla()
+PROP√ìSITO: Limpia la consola para mejorar la presentaci√≥n visual
+UBICACI√ìN: Funci√≥n auxiliar de interfaz
 ============================================================================*/
 void limpiarPantalla() {
     system("cls");  // Comando de Windows para limpiar pantalla
-                    // En Linux/Mac serÌa system("clear")
+                    // En Linux/Mac ser√≠a system("clear")
 }
 
 
 
 /*============================================================================
-FUNCI”N: pausar()
-PROP”SITO: Detiene la ejecuciÛn hasta que el usuario presione ENTER
-UBICACI”N: FunciÛn auxiliar de interfaz
-L”GICA: 
+FUNCI√ìN: pausar()
+PROP√ìSITO: Detiene la ejecuci√≥n hasta que el usuario presione ENTER
+UBICACI√ìN: Funci√≥n auxiliar de interfaz
+L√ìGICA: 
   1. Limpia el buffer de entrada (descarta caracteres residuales)
   2. Espera a que el usuario presione ENTER
 ============================================================================*/
@@ -131,44 +131,44 @@ void pausar() {
 
 
 /*============================================================================
-FUNCI”N: existeID()
-PAR¡METROS:
-  - nodo: Nodo actual a verificar (comienza desde raÌz)
+FUNCI√ìN: existeID()
+PAR√ÅMETROS:
+  - nodo: Nodo actual a verificar (comienza desde ra√≠z)
   - id: ID que queremos verificar
 RETORNA: true si existe, false si no existe
-L”GICA DE B⁄SQUEDA RECURSIVA:
+L√ìGICA DE B√öSQUEDA RECURSIVA:
   1. Si el nodo es NULL (llegamos al final), el ID NO existe ? return false
   2. Si el ID del nodo actual coincide -> return true
-  3. Si no, buscar recursivamente en sub·rbol IZQUIERDO O DERECHO
+  3. Si no, buscar recursivamente en sub√°rbol IZQUIERDO O DERECHO
 ============================================================================*/
 bool existeID(Nodo* nodo, int id) {
-    if (nodo == NULL) return false; // Caso base: fin del ·rbol
+    if (nodo == NULL) return false; // Caso base: fin del √°rbol
     if (nodo->id == id) return true; // Encontrado
-    // Busca en AMBOS sub·rboles (OR lÛgico)
+    // Busca en AMBOS sub√°rboles (OR l√≥gico)
     return existeID(nodo->izq, id) || existeID(nodo->der, id);
 }
 
 
 
 /* ============================================================================
-FUNCI”N: insertar()
-PAR¡METROS: Todos los datos del miembro a insertar
+FUNCI√ìN: insertar()
+PAR√ÅMETROS: Todos los datos del miembro a insertar
 
-L”GICA DE INSERCI”N EN ¡RBOL BINARIO DE B⁄SQUEDA (BST):
+L√ìGICA DE INSERCI√ìN EN √ÅRBOL BINARIO DE B√öSQUEDA (BST):
 Un BST mantiene la propiedad: 
-  - Todos los nodos del sub·rbol IZQUIERDO tienen IDs MENORES
-  - Todos los nodos del sub·rbol DERECHO tienen IDs MAYORES
+  - Todos los nodos del sub√°rbol IZQUIERDO tienen IDs MENORES
+  - Todos los nodos del sub√°rbol DERECHO tienen IDs MAYORES
 
-PROCESO DE INSERCI”N:
+PROCESO DE INSERCI√ìN:
 1. Crear nuevo nodo con los datos proporcionados
-2. Si el ·rbol est· vacÌo (raiz == NULL):
-   -> El nuevo nodo se convierte en la raÌz
-3. Si el ·rbol tiene nodos:
-   -> Buscar la posiciÛn correcta:
-     a) Empezar desde la raÌz
+2. Si el √°rbol est√° vac√≠o (raiz == NULL):
+   -> El nuevo nodo se convierte en la ra√≠z
+3. Si el √°rbol tiene nodos:
+   -> Buscar la posici√≥n correcta:
+     a) Empezar desde la ra√≠z
      b) Si ID < nodo actual -> ir a la IZQUIERDA
      c) Si ID >= nodo actual -> ir a la DERECHA
-     d) Repetir hasta encontrar un espacio vacÌo (NULL)
+     d) Repetir hasta encontrar un espacio vac√≠o (NULL)
    -> Insertar el nuevo nodo en ese espacio
    -> Actualizar el puntero 'padre' del nuevo nodo
 ============================================================================*/
@@ -176,20 +176,20 @@ void insertar(int id, string nombre, int anio, char genero, string rol) {
 	// PASO 1: Crear el nuevo nodo con los datos
     Nodo* nuevo = new Nodo(id, nombre, anio, genero, rol);
     
-    // PASO 2: Verificar si el ·rbol est· vacÌo
+    // PASO 2: Verificar si el √°rbol est√° vac√≠o
     if (raiz == NULL) {
         raiz = nuevo;
         cout << "\n Miembro insertado como raiz del arbol\n";
     } else {
-        // PASO 3: Buscar la posiciÛn correcta para insertar
-        Nodo* actual = raiz;     // Comienza desde la raÌz
-        Nodo* padre = NULL;      // Guardar· el padre del nuevo nodo
+        // PASO 3: Buscar la posici√≥n correcta para insertar
+        Nodo* actual = raiz;     // Comienza desde la ra√≠z
+        Nodo* padre = NULL;      // Guardar√° el padre del nuevo nodo
         
-        // BUCLE: Navegar por el ·rbol hasta encontrar espacio vacÌo
+        // BUCLE: Navegar por el √°rbol hasta encontrar espacio vac√≠o
         while (actual != NULL) {
             padre = actual;      // Guardar el nodo actual como padre potencial
             
-            // DECISI”N: øIr a la izquierda o derecha?
+            // DECISI√ìN: ¬øIr a la izquierda o derecha?
             if (id < actual->id) {
                 actual = actual->izq;  // ID menor -> ir IZQUIERDA
             } else {
@@ -213,77 +213,77 @@ void insertar(int id, string nombre, int anio, char genero, string rol) {
 }
 
 /*============================================================================
-FUNCI”N: buscar()
-PROP”SITO: Busca un nodo por su ID en el ·rbol
-UBICACI”N: OperaciÛn b·sica de b˙squeda
-PAR¡METROS:
-  - nodo: Nodo actual (comienza desde raÌz)
+FUNCI√ìN: buscar()
+PROP√ìSITO: Busca un nodo por su ID en el √°rbol
+UBICACI√ìN: Operaci√≥n b√°sica de b√∫squeda
+PAR√ÅMETROS:
+  - nodo: Nodo actual (comienza desde ra√≠z)
   - id: ID a buscar
 RETORNA: Puntero al nodo encontrado, o NULL si no existe
 
-L”GICA DE B⁄SQUEDA EN BST (Binaria eficiente):
-La b˙squeda aprovecha la propiedad del BST para ser M¡S R¡PIDA que una
-b˙squeda lineal. En cada paso descarta la mitad del ·rbol.
+L√ìGICA DE B√öSQUEDA EN BST (Binaria eficiente):
+La b√∫squeda aprovecha la propiedad del BST para ser M√ÅS R√ÅPIDA que una
+b√∫squeda lineal. En cada paso descarta la mitad del √°rbol.
 
 PROCESO:
 1. Si el nodo es NULL -> no encontrado -> return NULL
 2. Si el ID coincide -> encontrado -> return nodo
-3. Si ID buscado < ID actual -> buscar en sub·rbol IZQUIERDO (recursiÛn)
-4. Si ID buscado > ID actual -> buscar en sub·rbol DERECHO (recursiÛn)
+3. Si ID buscado < ID actual -> buscar en sub√°rbol IZQUIERDO (recursi√≥n)
+4. Si ID buscado > ID actual -> buscar en sub√°rbol DERECHO (recursi√≥n)
 ============================================================================*/
 Nodo* buscar(Nodo* nodo, int id) {
-    // CASO BASE 1: Nodo vacÌo (no encontrado)
+    // CASO BASE 1: Nodo vac√≠o (no encontrado)
     // CASO BASE 2: ID encontrado
     if (nodo == NULL || nodo->id == id) {
         return nodo;
     }
     
-    // CASO RECURSIVO: Decidir hacia dÛnde buscar
+    // CASO RECURSIVO: Decidir hacia d√≥nde buscar
     if (id < nodo->id) {
         return buscar(nodo->izq, id);  // Buscar en IZQUIERDA
     }
     return buscar(nodo->der, id);      // Buscar en DERECHA
 }
 
-/* FunciÛn para mostrar todos los miembros
-PROP”SITO: Muestra todos los miembros del ·rbol en orden ascendente por ID
-L”GICA: Usa recorrido INORDEN*/
+/* Funci√≥n para mostrar todos los miembros
+PROP√ìSITO: Muestra todos los miembros del √°rbol en orden ascendente por ID
+L√ìGICA: Usa recorrido INORDEN*/
 void mostrarMiembros(Nodo* nodo) {
     if (nodo != NULL) {
         mostrarMiembros(nodo->izq);                          // Procesar IZQUIERDA
-        cout << "ID: " << nodo->id << " - " << nodo->nombre << endl;  // Procesar RAÕZ
+        cout << "ID: " << nodo->id << " - " << nodo->nombre << endl;  // Procesar RA√çZ
         mostrarMiembros(nodo->der);                          // Procesar DERECHA
     }
 }
 
 /*============================================================================
-FUNCI”N: encontrarMinimo()
-PROP”SITO: Encuentra el nodo con el ID M¡S PEQUE—O en un sub·rbol
-UBICACI”N: FunciÛn auxiliar para eliminaciÛn
+FUNCI√ìN: encontrarMinimo()
+PROP√ìSITO: Encuentra el nodo con el ID M√ÅS PEQUE√ëO en un sub√°rbol
+UBICACI√ìN: Funci√≥n auxiliar para eliminaci√≥n
 USO: Necesaria para eliminar nodos con DOS hijos
-L”GICA: En un BST, el mÌnimo siempre est· en el EXTREMO IZQUIERDO
+L√ìGICA: En un BST, el m√≠nimo siempre est√° en el EXTREMO IZQUIERDO
 ============================================================================*/
 Nodo* encontrarMinimo(Nodo* nodo) {
-    // Ir siempre a la IZQUIERDA hasta que no haya m·s nodos
+    // Ir siempre a la IZQUIERDA hasta que no haya m√°s nodos
     while (nodo->izq != NULL) {
         nodo = nodo->izq;
     }
-    return nodo;  // Este es el nodo con ID mÌnimo
+    return nodo;  // Este es el nodo con ID m√≠nimo
 }
 
 
 
 /*============================================================================
-FUNCI”N: eliminarNodoAux()
-PROP”SITO: FunciÛn auxiliar recursiva para eliminar un nodo del ·rbol
-UBICACI”N: OperaciÛn compleja del ·rbol
-PAR¡METROS:
-  - nodo: Nodo actual en la recursiÛn
+FUNCI√ìN: eliminarNodoAux()
+PROP√ìSITO: Funci√≥n auxiliar recursiva para eliminar un nodo del √°rbol
+UBICACI√ìN: Operaci√≥n compleja del √°rbol
+PAR√ÅMETROS:
+  - nodo: Nodo actual en la recursi√≥n
   - id: ID del nodo a eliminar
-  - eliminado: Bandera para saber si se eliminÛ exitosamente
-RETORNA: Nuevo sub·rbol despuÈs de la eliminaciÛn
+  - eliminado: Bandera para saber si se elimin√≥ exitosamente
+RETORNA: Nuevo sub√°rbol despu√©s de la eliminaci√≥n
 
-L”GICA DE ELIMINACI”N EN BST (3 CASOS POSIBLES):
+L√ìGICA DE ELIMINACI√ìN EN BST (3 CASOS POSIBLES):
 ============================================================================
 CASO 1: NODO HOJA (sin hijos)
    Simplemente eliminar el nodo
@@ -294,12 +294,12 @@ CASO 2: NODO CON UN HIJO (izquierdo O derecho)
    Conectar su hijo directamente con su padre
    Retornar el hijo
 
-CASO 3: NODO CON DOS HIJOS (m·s complejo)
+CASO 3: NODO CON DOS HIJOS (m√°s complejo)
    NO se puede simplemente eliminar
    ESTRATEGIA: Reemplazar con el SUCESOR INORDEN
-   El sucesor es el nodo m·s pequeÒo del sub·rbol DERECHO
+   El sucesor es el nodo m√°s peque√±o del sub√°rbol DERECHO
    Copiar datos del sucesor al nodo actual
-   Eliminar el sucesor (que tendr· 0 o 1 hijo)
+   Eliminar el sucesor (que tendr√° 0 o 1 hijo)
 ============================================================================*/
 Nodo* eliminarNodoAux(Nodo* nodo, int id, bool& eliminado) {
     // CASO BASE: Nodo no encontrado
@@ -307,11 +307,11 @@ Nodo* eliminarNodoAux(Nodo* nodo, int id, bool& eliminado) {
     
     // PASO 1: Buscar el nodo a eliminar
     if (id < nodo->id) {
-        // Buscar en sub·rbol IZQUIERDO
+        // Buscar en sub√°rbol IZQUIERDO
         nodo->izq = eliminarNodoAux(nodo->izq, id, eliminado);
         if (nodo->izq != NULL) nodo->izq->padre = nodo;  // Actualizar padre
     } else if (id > nodo->id) {
-        // Buscar en sub·rbol DERECHO
+        // Buscar en sub√°rbol DERECHO
         nodo->der = eliminarNodoAux(nodo->der, id, eliminado);
         if (nodo->der != NULL) nodo->der->padre = nodo;  // Actualizar padre
     } else {
@@ -337,7 +337,7 @@ Nodo* eliminarNodoAux(Nodo* nodo, int id, bool& eliminado) {
         } 
         // CASO 3: TIENE DOS HIJOS
         else {
-            // Encontrar el SUCESOR (mÌnimo del sub·rbol derecho)
+            // Encontrar el SUCESOR (m√≠nimo del sub√°rbol derecho)
             Nodo* sucesor = encontrarMinimo(nodo->der);
             
             // COPIAR los datos del sucesor al nodo actual
@@ -347,7 +347,7 @@ Nodo* eliminarNodoAux(Nodo* nodo, int id, bool& eliminado) {
             nodo->genero = sucesor->genero;
             nodo->rol = sucesor->rol;
             
-            // ELIMINAR el sucesor del sub·rbol derecho
+            // ELIMINAR el sucesor del sub√°rbol derecho
             nodo->der = eliminarNodoAux(nodo->der, sucesor->id, eliminado);
             if (nodo->der != NULL) nodo->der->padre = nodo;
         }
@@ -358,10 +358,10 @@ Nodo* eliminarNodoAux(Nodo* nodo, int id, bool& eliminado) {
 
 
 /*============================================================================
-FUNCI”N: eliminarNodo()
-PROP”SITO: Interfaz p˙blica para eliminar un nodo por ID
-UBICACI”N: OperaciÛn p˙blica del ·rbol
-L”GICA: Llama a eliminarNodoAux() que hace el trabajo real
+FUNCI√ìN: eliminarNodo()
+PROP√ìSITO: Interfaz p√∫blica para eliminar un nodo por ID
+UBICACI√ìN: Operaci√≥n p√∫blica del √°rbol
+L√ìGICA: Llama a eliminarNodoAux() que hace el trabajo real
 ============================================================================*/
 void eliminarNodo(int id) {
     bool eliminado = false;
@@ -377,15 +377,15 @@ void eliminarNodo(int id) {
 
 
 /* Recorrido Inorden
-Es una forma de visitar TODOS los nodos del ·rbol en un orden especÌfico:
-  ORDEN: Izquierda -> RaÌz -> Derecha
-CARACTERÕSTICAS:
+Es una forma de visitar TODOS los nodos del √°rbol en un orden espec√≠fico:
+  ORDEN: Izquierda -> Ra√≠z -> Derecha
+CARACTER√çSTICAS:
   - En un BST, el recorrido INORDEN visita los nodos en ORDEN ASCENDENTE
-  - Es ˙til para listar elementos ordenados*/
+  - Es √∫til para listar elementos ordenados*/
 void inorden(Nodo* nodo) {
     if (nodo != NULL) {
         inorden(nodo->izq);          // PASO 1: Procesar IZQUIERDA
-        cout << nodo->id << " ";     // PASO 2: Procesar RAÕZ
+        cout << nodo->id << " ";     // PASO 2: Procesar RA√çZ
         inorden(nodo->der);          // PASO 3: Procesar DERECHA
     }
 }
@@ -394,15 +394,15 @@ void inorden(Nodo* nodo) {
 
 /*Recorrido Preorden
 Forma de visitar nodos donde procesamos el nodo ANTES de sus hijos:
-  ORDEN: RaÌz -> Izquierda -> Derecha
+  ORDEN: Ra√≠z -> Izquierda -> Derecha
 
-CARACTERÕSTICAS:
-  - ⁄til para COPIAR ·rboles
-  - ⁄til para obtener EXPRESIONES PREFIJAS
-  - Muestra la jerarquÌa desde arriba*/
+CARACTER√çSTICAS:
+  - √ötil para COPIAR √°rboles
+  - √ötil para obtener EXPRESIONES PREFIJAS
+  - Muestra la jerarqu√≠a desde arriba*/
 void preorden(Nodo* nodo) {
     if (nodo != NULL) {
-        cout << nodo->id << " ";     // PASO 1: Procesar RAÕZ primero
+        cout << nodo->id << " ";     // PASO 1: Procesar RA√çZ primero
         preorden(nodo->izq);         // PASO 2: Procesar IZQUIERDA
         preorden(nodo->der);         // PASO 3: Procesar DERECHA
     }
@@ -411,40 +411,40 @@ void preorden(Nodo* nodo) {
 
 
 /*Recorrido Postorden
-Forma de visitar nodos donde procesamos el nodo DESPU…S de sus hijos:
-  ORDEN: Izquierda -> Derecha -> RaÌz
+Forma de visitar nodos donde procesamos el nodo DESPU√âS de sus hijos:
+  ORDEN: Izquierda -> Derecha -> Ra√≠z
 
-CARACTERÕSTICAS:
-  - ⁄til para ELIMINAR ·rboles (eliminas hijos antes que padres)
-  - ⁄til para EVALUAR expresiones postfijas
+CARACTER√çSTICAS:
+  - √ötil para ELIMINAR √°rboles (eliminas hijos antes que padres)
+  - √ötil para EVALUAR expresiones postfijas
   - Procesa las hojas primero*/
 void postorden(Nodo* nodo) {
     if (nodo != NULL) {
         postorden(nodo->izq);        // PASO 1: Procesar IZQUIERDA
         postorden(nodo->der);        // PASO 2: Procesar DERECHA
-        cout << nodo->id << " ";     // PASO 3: Procesar RAÕZ al final
+        cout << nodo->id << " ";     // PASO 3: Procesar RA√çZ al final
     }
 }
 
 
 
 /*Recorrido por Niveles
-TambiÈn llamado "recorrido en anchura", visita los nodos nivel por nivel:
-  - Primero la raÌz (nivel 0)
+Tambi√©n llamado "recorrido en anchura", visita los nodos nivel por nivel:
+  - Primero la ra√≠z (nivel 0)
   - Luego todos los nodos del nivel 1
   - Luego todos los nodos del nivel 2
-  - Y asÌ sucesivamente
+  - Y as√≠ sucesivamente
 
-CARACTERÕSTICAS:
-  - NO usa recursiÛn, usa una COLA (queue)
-  - ⁄til para buscar nodos por cercanÌa a la raÌz
-  - Representa "generaciones" en un ·rbol genealÛgico*/
+CARACTER√çSTICAS:
+  - NO usa recursi√≥n, usa una COLA (queue)
+  - √ötil para buscar nodos por cercan√≠a a la ra√≠z
+  - Representa "generaciones" en un √°rbol geneal√≥gico*/
 void porNiveles(Nodo* nodo) {
     if (nodo == NULL) return;
     
     // Crear una COLA para almacenar nodos por procesar
     queue<Nodo*> cola;
-    cola.push(nodo);  // Empezar con la raÌz
+    cola.push(nodo);  // Empezar con la ra√≠z
     
     // BUCLE: Mientras haya nodos en la cola
     while (!cola.empty()) {
@@ -465,17 +465,17 @@ void porNiveles(Nodo* nodo) {
 
 
 /*============================================================================
-FUNCI”N: calcularAltura()
-PROP”SITO: Calcula la ALTURA de un ·rbol o sub·rbol
-UBICACI”N: InformaciÛn del ·rbol
+FUNCI√ìN: calcularAltura()
+PROP√ìSITO: Calcula la ALTURA de un √°rbol o sub√°rbol
+UBICACI√ìN: Informaci√≥n del √°rbol
  
-øQU… ES LA ALTURA?
+¬øQU√â ES LA ALTURA?
 ============================================================================
-La altura es la DISTANCIA M¡XIMA desde un nodo hasta una hoja
-(el camino m·s largo hacia abajo)
+La altura es la DISTANCIA M√ÅXIMA desde un nodo hasta una hoja
+(el camino m√°s largo hacia abajo)
 
 DEFINICIONES:
-  - Altura de NULL = -1 (por convenciÛn)
+  - Altura de NULL = -1 (por convenci√≥n)
   - Altura de una hoja = 0
   - Altura de un nodo = 1 + max(altura_izq, altura_der)
 
@@ -488,14 +488,14 @@ EJEMPLO:
 
 PROCESO RECURSIVO:
 1. Si nodo es NULL -> retornar -1
-2. Calcular altura del sub·rbol IZQUIERDO (recursiÛn)
-3. Calcular altura del sub·rbol DERECHO (recursiÛn)
-4. La altura del nodo = 1 + m·ximo de ambas alturas
+2. Calcular altura del sub√°rbol IZQUIERDO (recursi√≥n)
+3. Calcular altura del sub√°rbol DERECHO (recursi√≥n)
+4. La altura del nodo = 1 + m√°ximo de ambas alturas
 ============================================================================*/
 int calcularAltura(Nodo* nodo) {
     if (nodo == NULL) return -1;  // Caso base
     
-    // Calcular alturas de sub·rboles
+    // Calcular alturas de sub√°rboles
     int alturaIzq = calcularAltura(nodo->izq);
     int alturaDer = calcularAltura(nodo->der);
     
@@ -506,16 +506,16 @@ int calcularAltura(Nodo* nodo) {
 
 
 /*============================================================================
-FUNCI”N: mostrarHojas()
-PROP”SITO: Muestra todos los nodos HOJA del ·rbol
-UBICACI”N: InformaciÛn del ·rbol
+FUNCI√ìN: mostrarHojas()
+PROP√ìSITO: Muestra todos los nodos HOJA del √°rbol
+UBICACI√ìN: Informaci√≥n del √°rbol
  
-øQU… ES UN NODO HOJA?
+¬øQU√â ES UN NODO HOJA?
 ============================================================================
 Un nodo HOJA es un nodo que NO tiene hijos (ni izquierdo ni derecho)
-Son los nodos en los "extremos" del ·rbol
+Son los nodos en los "extremos" del √°rbol
 
-CONDICI”N: nodo->izq == NULL && nodo->der == NULL
+CONDICI√ìN: nodo->izq == NULL && nodo->der == NULL
 
 EJEMPLO:
        50
@@ -532,7 +532,7 @@ void mostrarHojas(Nodo* nodo) {
         if (nodo->izq == NULL && nodo->der == NULL) {
             cout << nodo->id << " ";
         }
-        // Continuar b˙squeda en sub·rboles
+        // Continuar b√∫squeda en sub√°rboles
         mostrarHojas(nodo->izq);
         mostrarHojas(nodo->der);
     }
@@ -541,36 +541,36 @@ void mostrarHojas(Nodo* nodo) {
 
 
 /*============================================================================
-FUNCI”N: mostrarInternos()
-PROP”SITO: Muestra todos los nodos INTERNOS (excepto la raÌz)
-UBICACI”N: InformaciÛn del ·rbol
-PAR¡METROS:
+FUNCI√ìN: mostrarInternos()
+PROP√ìSITO: Muestra todos los nodos INTERNOS (excepto la ra√≠z)
+UBICACI√ìN: Informaci√≥n del √°rbol
+PAR√ÅMETROS:
   - nodo: Nodo actual
-  - esRaiz: Flag para identificar la raÌz
+  - esRaiz: Flag para identificar la ra√≠z
 
-øQU… ES UN NODO INTERNO?
+¬øQU√â ES UN NODO INTERNO?
 ============================================================================
-Un nodo INTERNO es un nodo que SÕ tiene al menos un hijo
-Esta funciÛn excluye la raÌz de los resultados
+Un nodo INTERNO es un nodo que S√ç tiene al menos un hijo
+Esta funci√≥n excluye la ra√≠z de los resultados
 
-CONDICI”N: (nodo->izq != NULL || nodo->der != NULL) && !esRaiz
+CONDICI√ìN: (nodo->izq != NULL || nodo->der != NULL) && !esRaiz
  
 EJEMPLO:
-       50      <- RaÌz (no se muestra)
+       50      <- Ra√≠z (no se muestra)
       /  \
      30  70    <- Internos (tienen hijos)
     /    / \
    20   60 80  <- Hojas (no se muestran)
 
-INTERNOS (sin raÌz): 30, 70
+INTERNOS (sin ra√≠z): 30, 70
 ===========================================================================*/
 void mostrarInternos(Nodo* nodo, bool esRaiz) {
     if (nodo != NULL) {
-        // Si NO es raÌz Y tiene al menos un hijo ? es nodo interno
+        // Si NO es ra√≠z Y tiene al menos un hijo ? es nodo interno
         if (!esRaiz && (nodo->izq != NULL || nodo->der != NULL)) {
             cout << nodo->id << " ";
         }
-        // Continuar recursiÛn (ahora ya no es raÌz)
+        // Continuar recursi√≥n (ahora ya no es ra√≠z)
         mostrarInternos(nodo->izq, false);
         mostrarInternos(nodo->der, false);
     }
@@ -579,22 +579,22 @@ void mostrarInternos(Nodo* nodo, bool esRaiz) {
 
 
 /*============================================================================
-FUNCI”N: contarNodos()
-PROP”SITO: Cuenta el TOTAL de nodos en el ·rbol (peso del ·rbol)
-UBICACI”N: InformaciÛn del ·rbol
+FUNCI√ìN: contarNodos()
+PROP√ìSITO: Cuenta el TOTAL de nodos en el √°rbol (peso del √°rbol)
+UBICACI√ìN: Informaci√≥n del √°rbol
 
-L”GICA RECURSIVA:
+L√ìGICA RECURSIVA:
 ============================================================================
 Para contar nodos:
   - Si el nodo es NULL ? hay 0 nodos
   - Si el nodo existe ? hay 1 nodo (el actual) + 
-                        nodos del sub·rbol izquierdo +
-                        nodos del sub·rbol derecho
+                        nodos del sub√°rbol izquierdo +
+                        nodos del sub√°rbol derecho
 
 EJEMPLO:
        50          Total = 7 nodos
       /  \
-     30  70       = 1 (raÌz) + 3 (izq) + 3 (der)
+     30  70       = 1 (ra√≠z) + 3 (izq) + 3 (der)
     /    / \
    20   60 80
 ============================================================================*/
@@ -605,7 +605,7 @@ int contarNodos(Nodo* nodo) {
     return 1 + contarNodos(nodo->izq) + contarNodos(nodo->der);
 }
 
-// Mostrar camino desde raÌz a nodo
+// Mostrar camino desde ra√≠z a nodo
 void mostrarCamino(Nodo* nodo, int id) {
     // PASO 1: Buscar el nodo destino
     Nodo* destino = buscar(nodo, id);
@@ -618,13 +618,13 @@ void mostrarCamino(Nodo* nodo, int id) {
     vector<int> camino;  // Vector para almacenar IDs del camino
     Nodo* actual = destino;
     
-    // RETROCEDER desde destino hasta raÌz
+    // RETROCEDER desde destino hasta ra√≠z
     while (actual != NULL) {
         camino.push_back(actual->id);  // Guardar ID
         actual = actual->padre;         // Subir al padre
     }
     
-    // PASO 3: Mostrar el camino (invertido, de raÌz a destino)
+    // PASO 3: Mostrar el camino (invertido, de ra√≠z a destino)
     cout << "Camino desde raiz hasta " << id << ":\n";
     for (int i = camino.size() - 1; i >= 0; i--) {
         cout << camino[i];
@@ -635,38 +635,38 @@ void mostrarCamino(Nodo* nodo, int id) {
 
 
 
-/*FUNCI”N: calcularNivel()
-PAR¡METROS:
-  - nodo: Nodo actual en la b˙squeda
+/*FUNCI√ìN: calcularNivel()
+PAR√ÅMETROS:
+  - nodo: Nodo actual en la b√∫squeda
   - id: ID del nodo cuyo nivel queremos calcular
-  - nivel: Nivel actual (0 para la raÌz)
+  - nivel: Nivel actual (0 para la ra√≠z)
 RETORNA: El nivel del nodo, o -1 si no existe
 
-øQU… ES EL NIVEL?
+¬øQU√â ES EL NIVEL?
 ============================================================================
-El NIVEL de un nodo es su DISTANCIA desde la RAÕZ
-- RaÌz est· en nivel 0
-- Hijos de la raÌz est·n en nivel 1
-- Nietos de la raÌz est·n en nivel 2
+El NIVEL de un nodo es su DISTANCIA desde la RA√çZ
+- Ra√≠z est√° en nivel 0
+- Hijos de la ra√≠z est√°n en nivel 1
+- Nietos de la ra√≠z est√°n en nivel 2
 - etc.*/
 int calcularNivel(Nodo* nodo, int id, int nivel) {
     if (nodo == NULL) return -1;          // Caso base: no encontrado
     if (nodo->id == id) return nivel;     // Caso base: encontrado
     
-    // Buscar en sub·rbol IZQUIERDO
+    // Buscar en sub√°rbol IZQUIERDO
     int nivelIzq = calcularNivel(nodo->izq, id, nivel + 1);
-    if (nivelIzq != -1) return nivelIzq;  // Si se encontrÛ, retornar
+    if (nivelIzq != -1) return nivelIzq;  // Si se encontr√≥, retornar
     
-    // Si no se encontrÛ en izquierda, buscar en DERECHA
+    // Si no se encontr√≥ en izquierda, buscar en DERECHA
     return calcularNivel(nodo->der, id, nivel + 1);
 }
 
 
 
 /*============================================================================
-FUNCI”N: longitudCamino()
-LONGITUD = N˙mero de ARISTAS (conexiones) desde raÌz
-Esta funciÛn es ID…NTICA a calcularNivel() en su implementaciÛn*/
+FUNCI√ìN: longitudCamino()
+LONGITUD = N√∫mero de ARISTAS (conexiones) desde ra√≠z
+Esta funci√≥n es ID√âNTICA a calcularNivel() en su implementaci√≥n*/
 int longitudCamino(Nodo* nodo, int id, int nivel) {
     if (nodo == NULL) return -1;
     if (nodo->id == id) return nivel;
@@ -680,35 +680,35 @@ int longitudCamino(Nodo* nodo, int id, int nivel) {
 
 
 /*============================================================================
-FUNCI”N: buscarPorAnio()
-PROP”SITO: Busca TODOS los miembros nacidos en un aÒo especÌfico
-UBICACI”N: B˙squedas avanzadas
-PAR¡METROS:
+FUNCI√ìN: buscarPorAnio()
+PROP√ìSITO: Busca TODOS los miembros nacidos en un a√±o espec√≠fico
+UBICACI√ìN: B√∫squedas avanzadas
+PAR√ÅMETROS:
   - nodo: Nodo actual en el recorrido
-  - anio: AÒo de nacimiento a buscar
+  - anio: A√±o de nacimiento a buscar
   - resultados: Vector (por referencia) donde se almacenan los resultados
 
-L”GICA DE B⁄SQUEDA POR CRITERIO:
+L√ìGICA DE B√öSQUEDA POR CRITERIO:
 ============================================================================
 A diferencia de buscar por ID (que usa las propiedades del BST para ser
 eficiente), buscar por OTROS CAMPOS requiere revisar TODOS los nodos.
  
 ESTRATEGIA:
-1. Hacer un recorrido INORDEN (izquierda-raÌz-derecha)
-2. En cada nodo, verificar si el aÒo coincide
+1. Hacer un recorrido INORDEN (izquierda-ra√≠z-derecha)
+2. En cada nodo, verificar si el a√±o coincide
 3. Si coincide, agregar el nodo al vector de resultados
 4. Continuar el recorrido completo
  
 COMPLEJIDAD: O(n) - debe revisar todos los nodos
  
 NOTA: Se usa un VECTOR (paso por referencia con &) para acumular
-m˙ltiples resultados a travÈs de la recursiÛn
+m√∫ltiples resultados a trav√©s de la recursi√≥n
 ============================================================================*/
 void buscarPorAnio(Nodo* nodo, int anio, vector<Nodo*>& resultados) {
     if (nodo != NULL) {
         buscarPorAnio(nodo->izq, anio, resultados);  // IZQUIERDA
         
-        // VERIFICAR si el aÒo coincide
+        // VERIFICAR si el a√±o coincide
         if (nodo->anio == anio) {
             resultados.push_back(nodo);  // Agregar a resultados
         }
@@ -720,52 +720,52 @@ void buscarPorAnio(Nodo* nodo, int anio, vector<Nodo*>& resultados) {
 
 
 /*============================================================================
-FUNCI”N: buscarPorNombre()
-PROP”SITO: Busca miembros por nombre (b˙squeda PARCIAL y case-insensitive)
-UBICACI”N: B˙squedas avanzadas
-PAR¡METROS:
+FUNCI√ìN: buscarPorNombre()
+PROP√ìSITO: Busca miembros por nombre (b√∫squeda PARCIAL y case-insensitive)
+UBICACI√ìN: B√∫squedas avanzadas
+PAR√ÅMETROS:
   - nodo: Nodo actual en el recorrido
   - nombre: Texto a buscar (puede ser parcial)
   - resultados: Vector donde se almacenan coincidencias
  
-CARACTERÕSTICAS ESPECIALES:
+CARACTER√çSTICAS ESPECIALES:
 ============================================================================
-Esta b˙squeda es M¡S FLEXIBLE que una b˙squeda exacta:
+Esta b√∫squeda es M√ÅS FLEXIBLE que una b√∫squeda exacta:
  
-1. B⁄SQUEDA PARCIAL:
-   - Si buscas "Juan", encontrar· "Juan PÈrez", "MarÌa Juan", etc.
-   - Usa find() para ver si el texto est· CONTENIDO en el nombre
+1. B√öSQUEDA PARCIAL:
+   - Si buscas "Juan", encontrar√° "Juan P√©rez", "Mar√≠a Juan", etc.
+   - Usa find() para ver si el texto est√° CONTENIDO en el nombre
  
-2. CASE-INSENSITIVE (no distingue may˙sculas/min˙sculas):
-   - Convierte ambos strings a min˙sculas antes de comparar
+2. CASE-INSENSITIVE (no distingue may√∫sculas/min√∫sculas):
+   - Convierte ambos strings a min√∫sculas antes de comparar
    - "PEDRO", "Pedro" y "pedro" se consideran iguales
 
 PROCESO:
 1. Recorrer todos los nodos (INORDEN)
 2. Para cada nodo:
-   a) Convertir el nombre del nodo a min˙sculas
-   b) Convertir el texto buscado a min˙sculas
-   c) Verificar si el texto est· contenido en el nombre (find())
+   a) Convertir el nombre del nodo a min√∫sculas
+   b) Convertir el texto buscado a min√∫sculas
+   c) Verificar si el texto est√° contenido en el nombre (find())
    d) Si coincide, agregar a resultados
  
 EJEMPLO:
-¡rbol con nombres: "Ana LÛpez", "JUAN PEREZ", "MarÌa Juan"
-B˙squeda: "juan"
-Resultados: "JUAN PEREZ" y "MarÌa Juan" (ambos contienen "juan")
+√Årbol con nombres: "Ana L√≥pez", "JUAN PEREZ", "Mar√≠a Juan"
+B√∫squeda: "juan"
+Resultados: "JUAN PEREZ" y "Mar√≠a Juan" (ambos contienen "juan")
 ============================================================================*/
 void buscarPorNombre(Nodo* nodo, string nombre, vector<Nodo*>& resultados) {
     if (nodo != NULL) {
         buscarPorNombre(nodo->izq, nombre, resultados);  // IZQUIERDA
         
-        // CONVERTIR a min˙sculas para comparaciÛn case-insensitive
+        // CONVERTIR a min√∫sculas para comparaci√≥n case-insensitive
         string nombreNodo = nodo->nombre;
         string nombreBusqueda = nombre;
         
-        // transform() convierte cada car·cter a min˙scula
+        // transform() convierte cada car√°cter a min√∫scula
         transform(nombreNodo.begin(), nombreNodo.end(), nombreNodo.begin(), ::tolower);
         transform(nombreBusqueda.begin(), nombreBusqueda.end(), nombreBusqueda.begin(), ::tolower);
         
-        // BUSCAR si el nombre ingresado est· CONTENIDO en el nombre del nodo
+        // BUSCAR si el nombre ingresado est√° CONTENIDO en el nombre del nodo
         // find() retorna string::npos si NO se encuentra
         if (nombreNodo.find(nombreBusqueda) != string::npos) {
             resultados.push_back(nodo);  // Coincidencia encontrada
@@ -776,14 +776,14 @@ void buscarPorNombre(Nodo* nodo, string nombre, vector<Nodo*>& resultados) {
 }
 
 /*============================================================================
-FUNCI”N: buscarPorGenero()
-PROP”SITO: Busca todos los miembros de un gÈnero especÌfico (M o F)
-UBICACI”N: B˙squedas avanzadas
+FUNCI√ìN: buscarPorGenero()
+PROP√ìSITO: Busca todos los miembros de un g√©nero espec√≠fico (M o F)
+UBICACI√ìN: B√∫squedas avanzadas
  
-L”GICA:
+L√ìGICA:
 ============================================================================
 Similar a buscarPorAnio(), pero comparando el campo 'genero'
-Recorre todo el ·rbol y acumula nodos donde genero == genero_buscado
+Recorre todo el √°rbol y acumula nodos donde genero == genero_buscado
 ============================================================================*/
 void buscarPorGenero(Nodo* nodo, char genero, vector<Nodo*>& resultados) {
     if (nodo != NULL) {
@@ -799,12 +799,12 @@ void buscarPorGenero(Nodo* nodo, char genero, vector<Nodo*>& resultados) {
 
 
 
-// Mostrar resultados de b˙squeda
+// Mostrar resultados de b√∫squeda
 void mostrarResultados(vector<Nodo*>& resultados, string criterio) {
     if (resultados.empty()) {
         cout << "\n No se encontraron miembros con esa coincidencia\n";
     } else {
-        cout << "\n Se encontraron " << resultados.size() << " miembro(s) con esa coincidencia\n";
+        cout << "\n Se encontraron " << resultados.size() << " miembro(s) con ese criterio\n";
         cout << "============================================================\n";
         for (size_t i = 0; i < resultados.size(); i++) {
             cout << "\nMiembro #" << (i + 1) << ":\n";
@@ -818,7 +818,7 @@ void mostrarResultados(vector<Nodo*>& resultados, string criterio) {
     }
 }
 
-// MEN⁄ PRINCIPAL
+// MEN√ö PRINCIPAL
 int main() {
     int opcion, subopcion;
     
@@ -837,7 +837,7 @@ int main() {
         cin >> opcion;
         
         switch (opcion) {
-            case 1: { // GESTI”N DE MIEMBROS
+            case 1: { // GESTI√ìN DE MIEMBROS
                 do {
                     limpiarPantalla();
                     cout << "========== GESTION DE MIEMBROS ==========\n";
@@ -879,7 +879,7 @@ int main() {
                                 }
                             } while (nombre.empty());
                             
-                            // Validar aÒo
+                            // Validar a√±o
                             do {
                                 cout << "Ingrese anio de nacimiento: ";
                                 cin >> anio;
@@ -888,7 +888,7 @@ int main() {
                                 }
                             } while (anio <= 0);
                             
-                            // Validar gÈnero
+                            // Validar g√©nero
                             do {
                                 cout << "Ingrese genero (M/F): ";
                                 cin >> genero;
@@ -929,7 +929,7 @@ int main() {
 						        cin >> opcionBusqueda;
 						        
 						        switch (opcionBusqueda) {
-						            case 1: { // B˙squeda por ID (original)
+						            case 1: { // B√∫squeda por ID (original)
 						                cout << "\n--- BUSCAR POR ID ---\n";
 						                if (raiz == NULL) {
 						                    cout << "El arbol esta vacio\n";
@@ -959,8 +959,8 @@ int main() {
 						                break;
 						            }
 						            
-						            case 2: { // B˙squeda por AÒo
-						                cout << "\n--- BUSCAR POR A—O DE NACIMIENTO ---\n";
+						            case 2: { // B√∫squeda por A√±o
+						                cout << "\n--- BUSCAR POR A√ëO DE NACIMIENTO ---\n";
 						                if (raiz == NULL) {
 						                    cout << "El arbol esta vacio\n";
 						                } else {
@@ -970,13 +970,13 @@ int main() {
 						                    
 						                    vector<Nodo*> resultados;
 						                    buscarPorAnio(raiz, anio, resultados);
-						                    mostrarResultados(resultados, "el aÒo " + anio);
+						                    mostrarResultados(resultados, "el a√±o " + anio);
 						                }
 						                pausar();
 						                break;
 						            }
 						            
-						            case 3: { // B˙squeda por Nombre
+						            case 3: { // B√∫squeda por Nombre
 						                cout << "\n--- BUSCAR POR NOMBRE ---\n";
 						                if (raiz == NULL) {
 						                    cout << "El arbol esta vacio\n";
@@ -994,7 +994,7 @@ int main() {
 						                break;
 						            }
 						            
-						            case 4: { // B˙squeda por GÈnero
+						            case 4: { // B√∫squeda por G√©nero
 						                cout << "\n--- BUSCAR POR GENERO ---\n";
 						                if (raiz == NULL) {
 						                    cout << "El arbol esta vacio\n";
@@ -1018,7 +1018,7 @@ int main() {
 						            }
 						            
 						            case 5:
-						                // Volver al men˙ anterior
+						                // Volver al men√∫ anterior
 						                break;
 						                
 						            default:
@@ -1105,7 +1105,7 @@ int main() {
                 break;
             }
             
-            case 3: { // INFORMACI√ìN
+            case 3: { // INFORMACI√É¬ìN
                 do {
                     limpiarPantalla();
                     cout << "========== INFORMACION DEL ARBOL ==========\n";
@@ -1350,3 +1350,4 @@ int main() {
     
     return 0;
 }
+
